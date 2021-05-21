@@ -30,6 +30,8 @@ public class Aplicacao{
         * Ultilizei herança e interface apenas para as "contas" e não para os "clientes" pois não vi necessidade.
         *
         * Poliformismo ultilizado no projeto.
+        
+            PARA MELHOR VISUALIZAÇÃO, ULTILIZE O TERMINAL MAIOR POSSIVEL
         * */
         iniciar();
     }
