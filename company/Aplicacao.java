@@ -5,15 +5,13 @@ import com.company.contas.ContaPf;
 import com.company.contas.Iconta;
 
 
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class Aplicacao{
 
-    public static void main(String[] args) {
-        /*Eu queria colocar mais algumas funcionalidade
-        * como por exemplo, limitar a quantidade de centavos (casas decimais)
-        * colocar o tipo de tranferencia Pix
-        * entre outras coisas.
+    public static void main(String[] args) throws ParseException {
+        /*Eu queria colocar mais algumas funcionalidades,
         * mas fiz apenas o que o exercicío pede, como o Professor pediu!*/
 
         /*
@@ -32,12 +30,12 @@ public class Aplicacao{
         *
         * Poliformismo ultilizado no projeto.
         
-            PARA MELHOR VISUALIZAÇÃO, ULTILIZE O TERMINAL MAIOR POSSIVEL
+        PARA MELHOR VISUALIZAÇÃO, ULTILIZE O TERMINAL MAIOR POSSIVEL.
         * */
         iniciar();
     }
 
-    public static void iniciar(){
+    public static void iniciar() throws ParseException {
 
         String tipoConta;
         Scanner input = new Scanner(System.in);

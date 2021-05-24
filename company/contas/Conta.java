@@ -1,9 +1,11 @@
 package com.company.contas;
 
+import javax.swing.text.MaskFormatter;
 import java.math.BigDecimal;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -51,6 +53,13 @@ public class Conta {
 
         this.taxa = new BigDecimal("0.995");
 
+    }
+
+    //Formatar cpf e  cnpj
+    public static String fS(String texto, String mascara) throws ParseException {
+        MaskFormatter mf = new MaskFormatter(mascara);
+        mf.setValueContainsLiteralCharacters(false);
+        return mf.valueToString(texto);
     }
 
     protected String getNome() {

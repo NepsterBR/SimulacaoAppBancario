@@ -1,6 +1,7 @@
 package com.company.contas;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
 
 
 public class ContaPJ extends Conta implements Iconta {
@@ -84,9 +85,9 @@ public class ContaPJ extends Conta implements Iconta {
         System.out.println("Quanto deseja depositar na conta corrente empresarial? ");
         System.out.print("R$ ");
         depositar = input.nextBigDecimal();
-        System.out.print(getRazaoSocial() + ", você depositou: R$ " + depositar + ". ");
+        System.out.print(getRazaoSocial() + ", você depositou: R" + this.nf.format(depositar));
         this.saldoCc = this.saldoCc.add(depositar);
-        System.out.println("o saldo atual da conta corrente empresarial é de: R$ " + getSaldoCc());
+        System.out.println("o saldo atual da conta corrente empresarial é de: R" + this.nf.format(getSaldoCc()));
     }
 
     @Override
@@ -98,12 +99,12 @@ public class ContaPJ extends Conta implements Iconta {
         System.out.print("R$ ");
         sacar = input.nextBigDecimal();
         if (sacar.compareTo(this.saldoCc) < 1) {
-            System.out.print("Você Sacou R$ " + sacar + ". ");
+            System.out.print("Você Sacou R" + this.nf.format(sacar));
             this.saldoCc = this.saldoCc.subtract(sacar);
             this.taxa = new BigDecimal("0.995");
             this.saldoCc = this.saldoCc.multiply(this.taxa);
             System.out.println();
-            System.out.println(getRazaoSocial() + " o saldo atual da conta correte empresarial é de: R$ " + getSaldoCc());
+            System.out.println(getRazaoSocial() + " o saldo atual da conta correte empresarial é de: R" + this.nf.format(getSaldoCc()));
             this.qtdSaques++;
         } else {
             System.err.print("O seu saldo é insuficiente!");
@@ -111,16 +112,16 @@ public class ContaPJ extends Conta implements Iconta {
     }
 
     @Override
-    public void extrato() {
+    public void extrato() throws ParseException {
         System.out.println("__________________--- EXTRATO ---_________________");
         System.out.println("Razão Social " + getRazaoSocial());
-        System.out.println("Cnpj " + getCnpj());
+        System.out.println("Cnpj " + fS(getCnpj(), "##.###.###/####-##"));
         System.out.println();
-        System.out.println("Saldo atual da conta corrente da empresa é de: R$" + getSaldoCc());
+        System.out.println("Saldo atual da conta corrente da empresa é de: R" + this.nf.format(getSaldoCc()));
         System.out.println();
         System.out.println("A Conta Investimento *Empresarial* rende 11% do valor aplicado!");
         contaInvestimento();
-        System.out.println("Saldo atual da conta investimento empresarial é de: R$" + getSaldoCi());
+        System.out.println("Saldo atual da conta investimento empresarial é de: R" + this.nf.format(getSaldoCi()));
         System.out.println();
         System.out.println("Total de saques realizados: " + this.qtdSaques);
         System.out.println("___________________________________________________");
@@ -140,7 +141,7 @@ public class ContaPJ extends Conta implements Iconta {
     }
 
     @Override
-    public void escolheIndice(int indice) {
+    public void escolheIndice(int indice) throws ParseException {
         switch (indice) {
             case 1:
                 for (int i = 0; i < 50; i++) {
@@ -175,7 +176,7 @@ public class ContaPJ extends Conta implements Iconta {
     }
 
     @Override
-    public void indice() {
+    public void indice() throws ParseException {
         int indice;
 
         do {

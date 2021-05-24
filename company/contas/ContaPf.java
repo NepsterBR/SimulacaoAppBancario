@@ -1,6 +1,7 @@
 package com.company.contas;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
 
 public class ContaPf extends Conta implements Iconta {
 
@@ -9,7 +10,7 @@ public class ContaPf extends Conta implements Iconta {
 
     @Override
     public void abrirConta() {
-        System.out.print("Digite seu nome: ");
+        System.out.print("Digite seu  primeiro nome: ");
         this.nome = input.nextLine();
         setNome(this.nome);
         System.out.println(getNome() + ", nós do banco Let´s Code, estamos honrados em termos você conosco!");
@@ -47,7 +48,7 @@ public class ContaPf extends Conta implements Iconta {
         System.out.print("R$ ");
         sacar = input.nextBigDecimal();
         if (sacar.compareTo(this.saldoCc) < 1) {
-            System.out.print("Você Sacou R$ " + sacar + ". ");
+            System.out.print("Você Sacou R" + this.nf.format(sacar) + ". ");
             this.saldoCc = this.saldoCc.subtract(sacar);
             System.out.println(getNome() + " seu saldo atual é de: R" + this.nf.format(getSaldoCc()));
             this.qtdSaques++;
@@ -69,7 +70,7 @@ public class ContaPf extends Conta implements Iconta {
         tipoConta = input.next();
         if (tipoConta.equalsIgnoreCase("A")) {
             System.out.println();
-            System.out.println(getNome() + ", seu saldo atual na Conta Corrente é de: " + this.nf.format(getSaldoCc()));
+            System.out.println(getNome() + ", seu saldo atual na Conta Corrente é de: R" + this.nf.format(getSaldoCc()));
             System.out.println();
             System.out.print("Quanto deseja tranferir? ");
             transferir = this.input.nextBigDecimal();
@@ -77,13 +78,13 @@ public class ContaPf extends Conta implements Iconta {
             System.out.println("[A]Conta Investimento (Investir!) ou [B]Conta poupança? ");
             selecao = this.input.next();
             if (selecao.equalsIgnoreCase("A")) {
-                System.out.print(getNome() + ", você transferiu R$" + transferir);
+                System.out.print(getNome() + ", você transferiu R" + this.nf.format(transferir));
                 System.out.println(", para conta Investimento.");
                 this.saldoCi = this.saldoCi.add(transferir);
                 this.saldoCc = this.saldoCc.subtract(transferir);
             }
             if (selecao.equalsIgnoreCase("B")) {
-                System.out.print(getNome() + ", você transferiu R$" + transferir);
+                System.out.print(getNome() + ", você transferiu R" + this.nf.format(transferir));
                 System.out.println(", para Conta Poupança.");
                 this.saldoCp = this.saldoCp.add(transferir);
                 this.saldoCc = this.saldoCc.subtract(transferir);
@@ -91,7 +92,7 @@ public class ContaPf extends Conta implements Iconta {
         }
         if (tipoConta.equalsIgnoreCase("B")) {
             System.out.println();
-            System.out.println(getNome() + ", seu saldo atual na Conta investimento é de: " + getSaldoCi());
+            System.out.println(getNome() + ", seu saldo atual na Conta investimento é de: R" + this.nf.format(getSaldoCi()));
             System.out.println();
             System.out.print("Quanto deseja tranferir? ");
             transferir = this.input.nextBigDecimal();
@@ -99,13 +100,13 @@ public class ContaPf extends Conta implements Iconta {
             System.out.println("[A]Conta Corrente ou [B]Conta poupança? ");
             selecao = this.input.next();
             if (selecao.equalsIgnoreCase("A")) {
-                System.out.print(getNome() + ", você transferiu R$" + transferir);
+                System.out.print(getNome() + ", você transferiu R" + this.nf.format(transferir));
                 System.out.println(", para Conta Corrente.");
                 this.saldoCc = this.saldoCc.add(transferir);
                 this.saldoCi = this.saldoCi.subtract(transferir);
             }
             if (selecao.equalsIgnoreCase("B")) {
-                System.out.print(getNome() + ", você transferiu R$" + transferir);
+                System.out.print(getNome() + ", você transferiu R" + this.nf.format(transferir));
                 System.out.println(", para Conta Poupança");
                 this.saldoCp = this.saldoCp.add(transferir);
                 this.saldoCi = this.saldoCi.subtract(transferir);
@@ -113,7 +114,7 @@ public class ContaPf extends Conta implements Iconta {
         }
         if (tipoConta.equalsIgnoreCase("C")) {
             System.out.println();
-            System.out.println(getNome() + ", seu saldo atual na Conta Poupança é de: " + getSaldoCp());
+            System.out.println(getNome() + ", seu saldo atual na Conta Poupança é de: R" + this.nf.format(getSaldoCp()));
             System.out.println();
             System.out.print("Quanto deseja tranferir? ");
             transferir = this.input.nextBigDecimal();
@@ -121,13 +122,13 @@ public class ContaPf extends Conta implements Iconta {
             System.out.println("[A]Conta Corrente ou [B]Conta Ivestimento(Investir!)? ");
             selecao = this.input.next();
             if (selecao.equalsIgnoreCase("A")) {
-                System.out.print(getNome() + ", você transferiu R$" + transferir);
+                System.out.print(getNome() + ", você transferiu R" + this.nf.format(transferir));
                 System.out.println(", para Conta Corrente.");
                 this.saldoCc = this.saldoCc.add(transferir);
                 this.saldoCp = this.saldoCp.subtract(transferir);
             }
             if (selecao.equalsIgnoreCase("B")) {
-                System.out.print(getNome() + ", você transferiu R$" + transferir);
+                System.out.print(getNome() + ", você transferiu R" + this.nf.format(transferir));
                 System.out.println(", para Conta Investimento.");
                 this.saldoCi = this.saldoCi.add(transferir);
                 this.saldoCp = this.saldoCp.subtract(transferir);
@@ -137,14 +138,14 @@ public class ContaPf extends Conta implements Iconta {
     }
 
     @Override
-    public void extrato() {
+    public void extrato() throws ParseException {
         System.out.println("__________________--- EXTRATO ---_________________");
         System.out.println("Nome: " + getNome());
         System.out.println();
-        System.out.println("Cpf: " + getCpf());
+        System.out.println("Cpf: " + fS(getCpf(), "###.###.###-##"));
         System.out.println("Saldo atual da conta corrente é de: R" + this.nf.format(getSaldoCc()));
         System.out.println();
-        System.out.println("A Conta Investimento rende 7% do valor aplicado!");
+        System.out.println("A Conta Investimento rende 9% do valor aplicado!");
         contaInvestimento();
         System.out.println("Saldo atual da conta investimento é de: R" + this.nf.format(getSaldoCi()));
         System.out.println();
@@ -180,7 +181,7 @@ public class ContaPf extends Conta implements Iconta {
     }
 
     @Override
-    public void escolheIndice(int indice) {
+    public void escolheIndice(int indice) throws ParseException {
         switch (indice) {
             case 1:
                 for (int i = 0; i < 50; i++) {
@@ -214,7 +215,7 @@ public class ContaPf extends Conta implements Iconta {
         }
     }
 
-    public void indice() {
+    public void indice() throws ParseException {
         int indice;
 
         do {
