@@ -51,31 +51,31 @@ public class ContaPJ extends Conta implements Iconta {
         tipoConta = input.next();
         if (tipoConta.equalsIgnoreCase("A")) {
             System.out.println();
-            System.out.println(getRazaoSocial() + ", o saldo atual da empresa na Conta Corrente é de: " + getSaldoCc());
+            System.out.println(getRazaoSocial() + ", o saldo atual da empresa na Conta Corrente é de: R" + this.nf.format(getSaldoCc()));
             System.out.println();
             System.out.print("Quanto deseja tranferir? ");
             transferir = this.input.nextBigDecimal();
-            System.out.print(getRazaoSocial() + ", você transferiu R$" + transferir);
+            System.out.print(getRazaoSocial() + ", você transferiu R" + this.nf.format(transferir));
             System.out.println(", para conta Investimento.");
             this.saldoCi = this.saldoCi.add(transferir);
             this.saldoCc = this.saldoCc.subtract(transferir);
             this.taxa = new BigDecimal("0.995");
             this.saldoCc = this.saldoCc.multiply(this.taxa);
-            System.out.println("O saldo atual da conta corrente da empresa é de: R$" + getSaldoCc());
+            System.out.println("O saldo atual da conta corrente da empresa é de: R" + this.nf.format(getSaldoCc()));
         }
         if (tipoConta.equalsIgnoreCase("B")) {
             System.out.println();
-            System.out.println(getRazaoSocial() + ", o saldo atual da empresa na Conta Investimento é de: " + getSaldoCi());
+            System.out.println(getRazaoSocial() + ", o saldo atual da empresa na Conta Investimento é de: R" + this.nf.format(getSaldoCi()));
             System.out.println();
             System.out.print("Quanto deseja tranferir? ");
             transferir = this.input.nextBigDecimal();
-            System.out.print(getRazaoSocial() + ", você transferiu R$" + transferir);
+            System.out.print(getRazaoSocial() + ", você transferiu R" + this.nf.format(transferir));
             System.out.println(", para Conta corrente.");
             this.saldoCc = this.saldoCc.add(transferir);
             this.saldoCi = this.saldoCi.subtract(transferir);
             this.taxa = new BigDecimal("0.995");
             this.saldoCi = this.saldoCi.multiply(this.taxa);
-            System.out.println("O saldo atual da conta investimento da empresa é de: R$" + getSaldoCi());
+            System.out.println("O saldo atual da conta investimento da empresa é de: R" + this.nf.format(getSaldoCi()));
         }
     }
 
@@ -118,7 +118,7 @@ public class ContaPJ extends Conta implements Iconta {
         System.out.println();
         System.out.println("Saldo atual da conta corrente da empresa é de: R$" + getSaldoCc());
         System.out.println();
-        System.out.println("A Conta Investimento *Empresarial* rende 9% do valor aplicado!");
+        System.out.println("A Conta Investimento *Empresarial* rende 11% do valor aplicado!");
         contaInvestimento();
         System.out.println("Saldo atual da conta investimento empresarial é de: R$" + getSaldoCi());
         System.out.println();

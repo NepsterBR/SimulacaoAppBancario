@@ -35,9 +35,9 @@ public class ContaPf extends Conta implements Iconta {
         System.out.println("Quanto deseja depositar na conta corrente? ");
         System.out.print("R$ ");
         depositar = input.nextBigDecimal();
-        System.out.print(getNome() + ", você depositou: R$ " + depositar + ". ");
+        System.out.print(getNome() + ", você depositou: R" + this.nf.format(depositar));
         this.saldoCc = this.saldoCc.add(depositar);
-        System.out.println("Seu saldo atual é de: R$ " + getSaldoCc());
+        System.out.println("Seu saldo atual é de: R" + this.nf.format(getSaldoCc()));
     }
 
     @Override
@@ -49,7 +49,7 @@ public class ContaPf extends Conta implements Iconta {
         if (sacar.compareTo(this.saldoCc) < 1) {
             System.out.print("Você Sacou R$ " + sacar + ". ");
             this.saldoCc = this.saldoCc.subtract(sacar);
-            System.out.println(getNome() + " seu saldo atual é de: R$ " + getSaldoCc());
+            System.out.println(getNome() + " seu saldo atual é de: R" + this.nf.format(getSaldoCc()));
             this.qtdSaques++;
         } else {
             System.err.print("O seu saldo é insuficiente!");
@@ -69,7 +69,7 @@ public class ContaPf extends Conta implements Iconta {
         tipoConta = input.next();
         if (tipoConta.equalsIgnoreCase("A")) {
             System.out.println();
-            System.out.println(getNome() + ", seu saldo atual na Conta Corrente é de: " + getSaldoCc());
+            System.out.println(getNome() + ", seu saldo atual na Conta Corrente é de: " + this.nf.format(getSaldoCc()));
             System.out.println();
             System.out.print("Quanto deseja tranferir? ");
             transferir = this.input.nextBigDecimal();
@@ -142,15 +142,15 @@ public class ContaPf extends Conta implements Iconta {
         System.out.println("Nome: " + getNome());
         System.out.println();
         System.out.println("Cpf: " + getCpf());
-        System.out.println("Saldo atual da conta corrente é de: R$" + getSaldoCc());
+        System.out.println("Saldo atual da conta corrente é de: R" + this.nf.format(getSaldoCc()));
         System.out.println();
         System.out.println("A Conta Investimento rende 7% do valor aplicado!");
         contaInvestimento();
-        System.out.println("Saldo atual da conta investimento é de: R$" + getSaldoCi());
+        System.out.println("Saldo atual da conta investimento é de: R" + this.nf.format(getSaldoCi()));
         System.out.println();
         System.out.println("A Conta Poupança rende 2% do valor aplicado!");
         contaPoupanca();
-        System.out.println("Saldo atual da conta poupança é de: R$" + getSaldoCp());
+        System.out.println("Saldo atual da conta poupança é de: R" + this.nf.format(getSaldoCp()));
         System.out.println("Total de saques realizados: " + this.qtdSaques);
         System.out.println("___________________________________________________");
     }

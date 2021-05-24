@@ -3,6 +3,8 @@ package com.company.contas;
 import java.math.BigDecimal;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Conta {
@@ -23,6 +25,9 @@ public class Conta {
     protected BigDecimal taxa;
 
     protected Scanner input = new Scanner(System.in);
+
+    //coloquei "CANADA", pois não tem Brasil no padrão, concertei o "R$" no sout.
+    protected NumberFormat nf  = NumberFormat.getCurrencyInstance(Locale.CANADA);
 
     public Conta() {
 
